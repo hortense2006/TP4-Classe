@@ -18,8 +18,10 @@ public class Main {
         try {
             int premierChoix = sc.nextInt();
 
-            while (!connexion) {
-                if (premierChoix == 1) {
+            while (!connexion)
+            {
+                if (premierChoix == 1)
+                {
                     admin.authentifier();
 
                     System.out.println("\nVous souhaitez : \n1. Bloquer un utilisateur\n2. Supprimer une annonce\n3. Traiter un signalement");
@@ -36,7 +38,9 @@ public class Main {
                     }
                     connexion = true;
 
-                } else if (premierChoix == 2) {
+                }
+                else if (premierChoix == 2)
+                {
                     client.authentifier();
 
                     System.out.println("\nVous souhaitez aller dans :\n1. Mes Ventes\n2. Mes achats\n3. Modifier mon profil\n4. Vous déconnecter\n");
@@ -79,7 +83,8 @@ public class Main {
                     }
                     connexion = true;
 
-                } else {
+                }
+                else {
                     System.out.println("Erreur. Saisissez 1 ou 2 :");
                     premierChoix = sc.nextInt();
                 }

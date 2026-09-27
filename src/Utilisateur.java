@@ -4,7 +4,7 @@ public abstract class Utilisateur implements IAction{
 
     // ATTRIBUTS
     private int idUtilisateur;
-    private String nom;
+    protected String nom;
     private String email;
     Scanner sc = new Scanner(System.in);
     private BDD bdd = new BDD();
