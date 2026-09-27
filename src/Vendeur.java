@@ -1,69 +1,57 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vendeur extends Utilisateur implements IGestion{
-
-    // ATTRIBUTS
+public class Vendeur extends Utilisateur implements IGestion {
     private float evaluation;
     private int nbVente;
     private List<Article> mesArticles;
 
-    // CONSTRUCTEURS
-
-    public Vendeur()
-    {
+    public Vendeur() {
         super();
-        this.evaluation = 0;
+        this.evaluation = 0.0f;
         this.nbVente = 0;
-        this.mesArticles = new ArrayList<Article>();
+        this.mesArticles = new ArrayList<>();
     }
-    public Vendeur(int idUtilisateur, String nom, String email, float evaluation, int nbVente)
-    {
+
+    public Vendeur(int idUtilisateur, String nom, String email, float evaluation, int nbVente) {
         super(idUtilisateur, nom, email);
         this.evaluation = evaluation;
         this.nbVente = nbVente;
         this.mesArticles = new ArrayList<>();
     }
 
-    // METHODES
-
-    public void communiquer( Client unClient)
-    {
-        System.out.println(unClient.getNom() +"vous a envoyé un message.");
+    @Override
+    public void communiquer(Utilisateur destinataire, String message) {
+        System.out.println("Message de " + this.nom + " envoyé à " + destinataire.getNom() + " : " + message);
     }
-    public void vendre(Article unArticle)
-    {
-        if(mesArticles.contains(unArticle))
-        {
-            unArticle.marqueVendu();
-            mesArticles.remove(unArticle);
-            nbVente++;
 
-            System.out.println("L'article " + unArticle.getTitre() + " a été vendu.");
-        }
-        else
-        {
-            System.out.println("Cet article n'appartient pas au vendeur.");
-        }
+    @Override
+    public void bloquer(Utilisateur utilisateur) {
+        System.out.println("L'utilisateur " + utilisateur.getNom() + " a été bloqué par " + this.nom);
     }
-    public void publierAnnonce(Article unArticle)
-    {
+
+    @Override
+    public void publierAnnonce(Article unArticle) {
         mesArticles.add(unArticle);
-
-        System.out.println("L'article " + unArticle.getTitre() + " a été publié.");
+        System.out.println("Annonce publiée pour l'article : " + unArticle.getTitre());
     }
-    public void supprimerAnnonce(Article unArticle)
-    {
-        if(mesArticles.contains(unArticle))
-        {
-            mesArticles.remove(unArticle);
 
-            System.out.println("L'article " + unArticle.getTitre()
-                    + " a été supprimé.");
+    @Override
+    public boolean supprimerAnnonce(Article unArticle) throws ArticleNonTrouveException {
+        if (!mesArticles.contains(unArticle)) {
+            throw new ArticleNonTrouveException("Impossible de supprimer : l'article n'existe pas dans la liste du vendeur.");
         }
-        else
-        {
-            System.out.println("Cet article n'appartient pas au vendeur.");
+        mesArticles.remove(unArticle);
+        System.out.println("Annonce supprimée.");
+        return true;
+    }
+
+    public void vendre(Article unArticle) throws ArticleNonTrouveException {
+        if (!mesArticles.contains(unArticle)) {
+            throw new ArticleNonTrouveException("Vente impossible : l'article ne figure pas dans votre inventaire.");
         }
+        unArticle.marqueVendu();
+        mesArticles.remove(unArticle);
+        this.nbVente++;
     }
 }

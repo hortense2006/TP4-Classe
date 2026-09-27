@@ -1,4 +1,4 @@
 public interface IGestion {
-    public void supprimerAnnonce(Article article);
-public void publierAnnonce(Article article);
+    public boolean supprimerAnnonce(Article article) throws ArticleNonTrouveException;
+    public void publierAnnonce(Article article);
 }

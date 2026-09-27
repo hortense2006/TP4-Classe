@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Utilisateur implements IAction{
+public abstract class Utilisateur implements IAction{
 
     // ATTRIBUTS
     private int idUtilisateur;
@@ -27,36 +27,18 @@ public class Utilisateur implements IAction{
 
     // METHODES
     @Override
-    public void communiquer(Utilisateur destinataire, String message)
-    {
-        System.out.println("Message envoyé à "
-                + destinataire.getNom() + " : " + message);
-    }
+    public abstract void communiquer(Utilisateur destinataire, String message);
 
     @Override
-    public void bloquer(Utilisateur utilisateur)
-    {
-        System.out.println("L'utilisateur "
-                + utilisateur.getNom() + " a été bloqué.");
-    }
-    boolean authentifie = false;
-    public void saisirIdentifiants(String personne)
-    {
-        while(!authentifie) {
-            System.out.println("Entrez votre identifiant ?");
-            String mail = sc.next();
-            System.out.println("Entrez votre mot de passe ?");
-            String mdp = sc.next();
-            authentifie = authentifier(mail,mdp,personne);
-        }
-    }
-    public boolean authentifier(String mail, String mdp, String personne) {
-        System.out.println( personne + ": authentification en cours...");
+    public abstract void bloquer(Utilisateur utilisateur);
+
+
+    public boolean authentifier() throws AuthentificationException {
+        System.out.println("Saisissez votre mail :");
+        String mail = sc.next();
+        System.out.println("Saisissez votre mot de passe :");
+        String mdp = sc.next();
         return bdd.verifierIdentifiants(mail, mdp);
-    }
-    public void affichageTableaudeBord(){
-        System.out.println("-------------------------------- TABLEAU DE BORD ----------------------------------");
-        System.out.println("Mes ventes          Mes achats              Modifier mon profil          Déconnexion");
     }
     public void modifierProfil()
     {

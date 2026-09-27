@@ -22,17 +22,12 @@ public class Panier implements Comparable<Panier>
         System.out.println("L'article " + unArticle.getTitre() + " a été ajouté au panier.");
     }
 
-    public void retirerArticle(Article unArticle)
-    {
-        if(articles.contains(unArticle))
-        {
-            articles.remove(unArticle);
-            System.out.println("L'article " + unArticle.getTitre() + " a été retiré du panier.");
+    public void retirerArticle(Article unArticle) throws ArticleNonTrouveException {
+        if (!articles.contains(unArticle)) {
+            throw new ArticleNonTrouveException("Cet article n'est pas présent dans votre panier.");
         }
-        else
-        {
-            System.out.println("Cet article n'est pas dans le panier.");
-        }
+        articles.remove(unArticle);
+        System.out.println("L'article " + unArticle.getTitre() + " a été retiré du panier.");
     }
 
     public float calculerPrixTotal()

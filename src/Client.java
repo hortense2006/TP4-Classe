@@ -1,60 +1,48 @@
-public class Client extends Utilisateur {
+import java.util.ArrayList;
+import java.util.List;
 
-    // ATTRIBUTS
+public class Client extends Utilisateur {
     private String adresse;
-    private float soldeP;
+    private double soldeP;
     private String paiement;
     private Panier panier;
 
-    // CONSTRUCTEURS
-
-    public Client()
-    {
+    public Client() {
         super();
-        this.adresse = "Adresse non renseignée";
-        this.soldeP = 0;
-        this.paiement = "Aucun de moyen de paiement enregistre";
-        this.panier = new Panier(1, "22/09/2026");
+        this.adresse = "Inconnue";
+        this.soldeP = 0.0;
+        this.paiement = "Carte";
+        this.panier = new Panier(1, "2026-01-01");
     }
 
-    public Client(int idUtilisateur, String nom, String email, String adresse, float soldeP, String paiement)
-    {
-        super(idUtilisateur,nom,email);
+    public Client(int idUtilisateur, String nom, String email, String adresse, double soldeP, String paiement) {
+        super(idUtilisateur, nom, email);
         this.adresse = adresse;
         this.soldeP = soldeP;
         this.paiement = paiement;
+        this.panier = new Panier(idUtilisateur, "2026-01-01");
     }
 
-    // METHODES
-    public void acheter(Article unArticle)
-    {
-        System.out.println(getNom()+ "a acheté :" + unArticle.getTitre());
-    }
-    public void communiquer(Vendeur unVendeur)
-    {
-        System.out.println(unVendeur.getNom() + "vous a envoyé un message.");
-    }
-    public void rechercherArticle(Article unArticle)
-    {
-        if(unArticle != null)
-        {
-            System.out.println("Article trouvé : " + unArticle.getTitre());
-        }
-        else
-        {
-            System.out.println("Article introuvable.");
-        }
-    }
-    public void rechercherVendeur(Vendeur unVendeur)
-    {
-        if(unVendeur != null)
-        {
-            System.out.println("Vendeur trouvé : " + unVendeur.getNom());
-        }
-        else
-        {
-            System.out.println("Vendeur introuvable.");
-        }
+    @Override
+    public void communiquer(Utilisateur destinataire, String message) {
+        System.out.println("Message de " + this.nom + " envoyé à " + destinataire.getNom() + " : " + message);
     }
 
+    @Override
+    public void bloquer(Utilisateur utilisateur) {
+        System.out.println("L'utilisateur " + utilisateur.getNom() + " a été bloqué par " + this.nom);
+    }
+
+    public void acheter(Article unArticle) {
+        System.out.println("Achat réalisé pour l'article : " + unArticle.getTitre());
+    }
+
+    public List<Article> rechercher(String motCle) {
+        System.out.println("Recherche d'articles contenant : " + motCle);
+        return new ArrayList<>();
+    }
+
+    public Panier getPanier() {
+        return this.panier;
+    }
 }
