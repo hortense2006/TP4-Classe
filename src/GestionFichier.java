@@ -79,4 +79,4 @@ public class GestionFichier {
         } //parcourt la liste d'articles et appelle la méthode d'affichage
     }
 }
-}
+
