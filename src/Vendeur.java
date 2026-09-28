@@ -51,6 +51,10 @@ public class Vendeur extends Utilisateur implements IGestion {
             throw new ArticleNonTrouveException("Vente impossible : l'article ne figure pas dans votre inventaire.");
         }
         unArticle.marqueVendu();
+        GestionFichier.enregistrerArticles(mesArticles); //enregistrer les infos(méthode qui lit)
+        System.out.println("Afficher les infos de l'article");
+        GestionFichier.recupererArticles(); //ENREGISTRE les infos (methode qui recupere)
+        GestionFichier.afficherArticlesExtraits(mesArticles); // AFFICHE les infos (methode qui ecrit)
         mesArticles.remove(unArticle);
         this.nbVente++;
     }
