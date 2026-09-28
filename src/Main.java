@@ -53,6 +53,7 @@ public class Main {
                         if (choixVente == 1) {
                             vendeur.communiquer(client, "Bonjour");
                         } else if (choixVente == 2) {
+                            vendeur.publierAnnonce(article);
                             vendeur.vendre(article);
                         } else if (choixVente == 3) {
                             vendeur.publierAnnonce(article);
