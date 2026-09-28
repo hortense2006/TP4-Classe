@@ -57,7 +57,7 @@ public class Vendeur extends Utilisateur implements IGestion {
         mesArticles.add(unArticle);
         GestionFichier.enregistrerArticles(mesArticles); //enregistrer les infos(méthode qui lit)
         System.out.println("Afficher les infos de l'article");
-        List<Article> articlesRecuperes = GestionFichier.recupererArticles(mesArticles); //ENREGISTRE les infos (methode qui recupere)
+        List<Article> articlesRecuperes = GestionFichier.recupererArticles(); //ENREGISTRE les infos (methode qui recupere)
         GestionFichier.afficherArticlesExtraits(articlesRecuperes); // AFFICHE les infos (methode qui ecrit)
     }
 }

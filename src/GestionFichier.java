@@ -27,8 +27,8 @@ public class GestionFichier {
 
 
 
-    public static List<Article> recupererArticles(List<Article> articles) {
-        List<Article> listeExtraite = articles;
+    public static List<Article> recupererArticles() {
+        List<Article> listeExtraite = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(CHEMIN_FICHIER))) { //crée un objet d'un fichier texte article.txt avec la classe BufferedReader
             String ligne;
