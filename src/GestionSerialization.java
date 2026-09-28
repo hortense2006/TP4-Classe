@@ -25,7 +25,7 @@ public class GestionSerialization {
         }
     }
 
-    // AFFICHAGE (méthode séparée, comme demandé)
+    // AFFICHAGE
     public static void afficher(List<Article> articles) {
         for (Article a : articles) {
             a.afficherDetails();
