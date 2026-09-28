@@ -6,6 +6,7 @@ public class Client extends Utilisateur {
     private double soldeP;
     private String paiement;
     private Panier panier;
+    private List<Article> achats = new ArrayList<>();
 
     public Client() {
         super();
@@ -13,6 +14,7 @@ public class Client extends Utilisateur {
         this.soldeP = 0.0;
         this.paiement = "Carte";
         this.panier = new Panier(1, "2026-01-01");
+        this.achats = new ArrayList<>();
     }
 
     public Client(int idUtilisateur, String nom, String email, String adresse, double soldeP, String paiement) {
@@ -35,6 +37,12 @@ public class Client extends Utilisateur {
 
     public void acheter(Article unArticle) {
         System.out.println("Achat réalisé pour l'article : " + unArticle.getTitre());
+        // On créé une liste d'articles
+        achats.add(unArticle);
+        GestionSerialization.sauvegarder(achats, "achats.ser");
+        System.out.println("---------- AFFICHER LES INFORMATIONS DE L'ARTICLE ACHETE ---------------");
+        List<Article> recuperes = GestionSerialization.charger("achats.ser");
+        GestionSerialization.afficher(recuperes);
     }
 
     public List<Article> rechercher(String motCle) {
