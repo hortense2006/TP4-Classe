@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -7,10 +9,20 @@ public class Main {
         Admin admin = new Admin();
         Client client = new Client();
         Vendeur vendeur = new Vendeur();
+        Scanner sc = new Scanner(System.in);
+        List<Article> articles = new ArrayList<>();
 
         Article article = new Vetements("Pull", 25.0f, "Très bon état", "Rouge", "pull.png");
-
-        Scanner sc = new Scanner(System.in);
+        Article sac = new Accessoire("Sac", 15.0f, "Neuf", "Noir", "sac.png");
+        // On créé une liste d'articles
+        articles.add(article);
+        articles.add(sac);
+        // On la sauvegarde sans un fichier .ser (Sérialisation) (Objets -> bytes)
+        GestionSerialization.sauvegarder(articles, "articles.ser");
+        // On récupères la liste (Désérialisation) (bytes-> Objets)
+        List<Article> recuperes = GestionSerialization.charger("articles.ser");
+        // On l'affiche
+        GestionSerialization.afficher(recuperes);
 
         System.out.println("Vous souhaitez vous connecter en tant qu'administrateur ou en tant qu'utilisateur ?");
         System.out.println("1. Administrateur\n2. Utilisateur\n");

@@ -1,12 +1,14 @@
-public abstract class Article {
+import java.io.*;
+public abstract class Article implements Serializable{
     protected String titre;
     protected float prix;
     protected String etat;
     protected String couleur;
     protected String photo;
     protected int idArticle;
+    private static final long serialVersionUID = 1L;
 
-    public Article() {
+    public Article(){
     }
 
     public Article(String titre, float prix, String etat, String couleur, String photo) {
