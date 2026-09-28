@@ -48,4 +48,21 @@ public abstract class Article implements Serializable{
     public float getPrix() {
         return this.prix;
     }
+
+    public String getEtat() {
+        return this.etat;
+    }
+
+    public String getCouleur() {
+        return this.couleur;
+    }
+
+    public String getPhoto() {
+        return this.photo;
+    }
+
+    public String exporterFormatTexte() {
+        String type = (this instanceof Vetements) ? "VETEMENT" : "ACCESSOIRE";
+        return type + ";" + titre + ";" + prix + ";" + etat + ";" + couleur + ";" + photo;
+    }
 }
