@@ -13,14 +13,14 @@ public class GestionFichier {
 
 
     public static void enregistrerArticles(List<Article> articles) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CHEMIN_FICHIER))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CHEMIN_FICHIER))) { //crée un objet d'un fichier texte article.txt avec la classe BufferedWriter
             for (Article article : articles) {
                 writer.write(article.exporterFormatTexte());
                 writer.newLine();
-            }
+            }// prendre les données depuis le programmme et les enregistrer dans le fichier
             System.out.println(" Enregistrement réussi dans " + CHEMIN_FICHIER);
         } catch (IOException e) {
-            System.err.println(" Écriture impossible : " + e.getMessage());
+            System.out.println(" Écriture impossible : " + e.getMessage());
         }
     } // parcourt chaque objet article et recupere la chaine de caractere qui le caracterise
     // ecrit la chaine de caractere
@@ -30,10 +30,10 @@ public class GestionFichier {
     public static List<Article> recupererArticles() {
         List<Article> listeExtraite = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(CHEMIN_FICHIER))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(CHEMIN_FICHIER))) { //crée un objet d'un fichier texte article.txt avec la classe BufferedReader
             String ligne;
             while ((ligne = reader.readLine()) != null) {
-                if (ligne.trim().isEmpty()) continue; // lit les lignes un par un
+                if (ligne.trim().isEmpty()) continue; // lit les lignes un par un, et récupere les données pour les charger dans le programme
 
                 // Extraction des données avec le séparateur ";"
                 String[] elements = ligne.split(SÉPARATEUR);
