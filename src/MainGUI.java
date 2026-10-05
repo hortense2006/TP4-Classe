@@ -19,6 +19,7 @@ public class MainGUI {
     }
 
     public static void main(String[] args) {
+        Interface.main(args);
         StyleUI.initialiser();
 
         // Toute création de fenêtre Swing doit se faire dans l'Event Dispatch Thread (EDT)
