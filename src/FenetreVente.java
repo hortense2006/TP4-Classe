@@ -1,50 +1,136 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.io.File;
 
 /**
- * Composant graphique personnalisé : affiche la photo d'un article.
- * - si le fichier image existe (ex : "pull.png"), on l'affiche ;
- * - sinon on dessine un rectangle coloré avec l'initiale du titre (placeholder).
- * On redéfinit paintComponent(), la méthode appelée par Swing pour dessiner.
+ * FENÊTRE 2 : "Vendre un article" (formulaire du wireframe).
+ * Les champs correspondent aux attributs de la classe Article du TP4
+ * (titre, prix, état, couleur, photo) + le choix Vêtements / Accessoire.
+ *
+ * Les composants sont des ATTRIBUTS de la classe : au TP6 Q4 on pourra
+ * y accéder depuis les listeners (ex : lire txtTitre quand on clique sur "Publier").
  */
-public class ApercuImage extends JPanel {
+public class FenetreVente extends JFrame {
 
-    private Image image;              // null si le fichier n'existe pas
-    private final String libelle;
-    private final Color couleur;
+    // --- Composants du formulaire ---
+    private final JTextField txtTitre = new JTextField(18);
+    private final JTextArea txtDescription = new JTextArea(3, 18);
+    private final JTextField txtPrix = new JTextField(6);
+    private final JComboBox<String> cbCategorie = new JComboBox<>(new String[]{"Vêtements", "Accessoires"});
+    private final JButton btnImage = new JButton("Ajouter une image");
+    private final JComboBox<String> cbEtat =
+            new JComboBox<>(new String[]{"Neuf", "Très bon état", "Bon état", "Satisfaisant"});
+    private final JButton btnPublier = StyleUI.creerBouton("Publier");
 
-    public ApercuImage(String cheminPhoto, String libelle, Color couleur) {
-        this.libelle = libelle;
-        this.couleur = couleur;
-        setOpaque(false);
-        setPreferredSize(new Dimension(100, 110));
-        if (cheminPhoto != null && new File(cheminPhoto).exists()) {
-            this.image = new ImageIcon(cheminPhoto).getImage();
-        }
+    public FenetreVente() {
+        super("Vendre un Article");
+        setContentPane(creerContenu());
+        setSize(420, 520);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // ferme cette fenêtre seulement
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g.create();
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    JPanel creerContenu() {
+        JPanel racine = new JPanel(new BorderLayout());
+        racine.setBackground(StyleUI.FOND);
+        racine.add(StyleUI.creerBarreNavigation("Vendre"), BorderLayout.NORTH);
 
-        if (image != null) {
-            g2.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-        } else {
-            g2.setColor(couleur);
-            g2.fillRoundRect(0, 0, getWidth(), getHeight(), 12, 12);
+        // Carte blanche centrée contenant le formulaire
+        JPanel formulaire = new JPanel(new GridBagLayout());
+        formulaire.setBackground(Color.WHITE);
+        formulaire.setBorder(BorderFactory.createCompoundBorder(
+                new LineBorder(StyleUI.NAV, 1), new EmptyBorder(14, 16, 14, 16)));
 
-            // Initiale du titre, centrée
-            g2.setColor(Color.WHITE);
-            g2.setFont(new Font("SansSerif", Font.BOLD, 30));
-            String initiale = libelle.isEmpty() ? "?" : libelle.substring(0, 1).toUpperCase();
-            FontMetrics fm = g2.getFontMetrics();
-            int x = (getWidth() - fm.stringWidth(initiale)) / 2;
-            int y = (getHeight() + fm.getAscent() - fm.getDescent()) / 2;
-            g2.drawString(initiale, x, y);
+        // Titre du formulaire (sur 2 colonnes)
+        JLabel titre = new JLabel("Mettre en vente", SwingConstants.CENTER);
+        titre.setFont(StyleUI.POLICE_TITRE);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(0, 0, 12, 0);
+        formulaire.add(titre, gbc);
+
+        // Une ligne = un libellé + un champ
+        txtDescription.setLineWrap(true);
+        txtDescription.setWrapStyleWord(true);
+        ajouterLigne(formulaire, 1, "Titre :", txtTitre);
+        ajouterLigne(formulaire, 2, "Description :", new JScrollPane(txtDescription));
+        ajouterLigne(formulaire, 3, "Prix (€) :", txtPrix);
+        ajouterLigne(formulaire, 4, "Catégorie :", cbCategorie);
+        ajouterLigne(formulaire, 5, "Image :", btnImage);
+        ajouterLigne(formulaire, 6, "État :", cbEtat);
+        ajouterLigne(formulaire, 7, "Couleur :", creerChoixCouleur());
+
+        // Bouton "Publier" centré en bas
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0; gbc.gridy = 8; gbc.gridwidth = 2;
+        gbc.insets = new Insets(14, 0, 0, 0);
+        formulaire.add(btnPublier, gbc);
+
+        // Wrapper pour centrer la carte avec des marges
+        JPanel centre = new JPanel(new GridBagLayout());
+        centre.setBackground(StyleUI.FOND);
+        centre.add(formulaire);
+        racine.add(centre, BorderLayout.CENTER);
+
+        return racine;
+    }
+
+    /** Ajoute "libellé + composant" sur une ligne du GridBagLayout. */
+    private void ajouterLigne(JPanel p, int ligne, String libelle, JComponent champ) {
+        GridBagConstraints g = new GridBagConstraints();
+        g.gridy = ligne;
+        g.insets = new Insets(4, 0, 4, 8);
+        g.anchor = GridBagConstraints.NORTHWEST;
+
+        g.gridx = 0;
+        JLabel l = new JLabel(libelle);
+        l.setFont(StyleUI.POLICE_GRAS);
+        p.add(l, g);
+
+        g.gridx = 1;
+        g.insets = new Insets(4, 0, 4, 0);
+        g.fill = GridBagConstraints.HORIZONTAL;
+        g.weightx = 1.0;
+        p.add(champ, g);
+    }
+
+    /** 5 pastilles de couleur : un seul choix possible (ButtonGroup). */
+    private JPanel creerChoixCouleur() {
+        JPanel panneau = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        panneau.setOpaque(false);
+        ButtonGroup groupe = new ButtonGroup();   // garantit qu'une seule pastille est sélectionnée
+
+        String[] noms = {"Gris", "Bleu", "Vert", "Rouge", "Noir"};
+        Color[] couleurs = {Color.GRAY, new Color(0x2E86C1), new Color(0x28A745),
+                new Color(0xD9382E), new Color(0x2C3E50)};
+
+        for (int i = 0; i < noms.length; i++) {
+            // Sous-classe anonyme : on dessine nous-mêmes le fond coloré (le look Metal le masquerait)
+            JToggleButton pastille = new JToggleButton() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    g.setColor(getBackground());
+                    g.fillRect(0, 0, getWidth(), getHeight());
+                    super.paintComponent(g);
+                }
+            };
+            pastille.setActionCommand(noms[i]);      // on pourra récupérer la couleur choisie
+            pastille.setToolTipText(noms[i]);
+            pastille.setBackground(couleurs[i]);
+            pastille.setOpaque(true);
+            pastille.setContentAreaFilled(false);     // on désactive le remplissage standard (bleu quand sélectionné)
+            pastille.setFocusPainted(false);
+            pastille.setPreferredSize(new Dimension(26, 26));
+            pastille.setBorder(new LineBorder(Color.DARK_GRAY, 1));
+            // La sélection est visible grâce à une bordure plus épaisse
+            pastille.addItemListener(e -> pastille.setBorder(
+                    new LineBorder(pastille.isSelected() ? Color.BLACK : Color.DARK_GRAY,
+                            pastille.isSelected() ? 3 : 1)));
+            groupe.add(pastille);
+            if (i == 0) pastille.setSelected(true);   // "Gris" par défaut
+            panneau.add(pastille);
         }
-        g2.dispose();
+        return panneau;
     }
 }
