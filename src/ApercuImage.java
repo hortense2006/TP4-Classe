@@ -48,3 +48,4 @@ public class ApercuImage extends JPanel {
         g2.dispose();
     }
 }
+
