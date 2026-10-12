@@ -1,5 +1,6 @@
 package controller;
 
+import main.MainGUI;
 import model.*;
 import view.FenetreCatalogue;
 import view.FenetrePanier;

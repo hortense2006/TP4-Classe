@@ -1,3 +1,5 @@
+package main;
+
 import controller.Interface;
 import model.Accessoire;
 import model.Article;
@@ -12,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Point d'entrée de l'interface graphique (le Main console du TP4 reste inchangé).
+ * Point d'entrée de l'interface graphique (le main.Main console du TP4 reste inchangé).
  * Crée quelques Model.Article du TP4 et ouvre les 3 fenêtres côte à côte.
  */
 public class MainGUI {
 
     /** Articles de démonstration (mêmes que dans le wireframe). */
-    static List<Article> creerArticlesDemo() {
+    public static List<Article> creerArticlesDemo() {
         List<Article> articles = new ArrayList<>();
         articles.add(new Vetements("T-shirt Vintage", 15.00f, "Très bon état", "Bleu", "tshirt.png"));
         articles.add(new Accessoire("Baskets de Sport", 60.00f, "Bon état", "Bleu", "baskets.png"));
