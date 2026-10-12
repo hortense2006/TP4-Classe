@@ -32,7 +32,7 @@ public class FenetreCatalogue extends JFrame {
     }
 
     /** Assemble les 2 zones de la page. */
-    JPanel creerContenu() {
+    public JPanel creerContenu() {
         JPanel racine = new JPanel(new BorderLayout());
         racine.setBackground(StyleUI.FOND);
 

@@ -30,7 +30,7 @@ public class FenetrePanier extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
-    JPanel creerContenu() {
+    public JPanel creerContenu() {
         JPanel racine = new JPanel(new BorderLayout());
         racine.setBackground(StyleUI.FOND);
         racine.add(StyleUI.creerBarreNavigation("Model.Panier"), BorderLayout.NORTH);
