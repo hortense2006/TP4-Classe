@@ -1,3 +1,11 @@
+package Controller;
+
+import Model.*;
+import View.FenetreCatalogue;
+import View.FenetrePanier;
+import View.FenetreVente;
+import View.StyleUI;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -7,7 +15,7 @@ import java.util.List;
 
 /**
  * Question 4 : contrôleur de l'interface.
- * Les fenêtres de la Q3 (FenetreCatalogue, FenetrePanier, FenetreVente, StyleUI) restent INCHANGÉES :
+ * Les fenêtres de la Q3 (View.FenetreCatalogue, View.FenetrePanier, View.FenetreVente, View.StyleUI) restent INCHANGÉES :
  * on les instancie, puis on retrouve leurs boutons dans l'arbre de composants Swing
  * pour y brancher les LISTENERS (exceptions, fichier texte, sérialisation).
  */
@@ -26,13 +34,13 @@ public class Interface {
     private static FenetrePanier fenPanier;
     private static FenetreVente fenVente;
 
-    private static final List<String> NAV = Arrays.asList("Catalogue", "Vendre", "Panier", "Compte", "Admin");
+    private static final List<String> NAV = Arrays.asList("Catalogue", "Vendre", "Model.Panier", "Compte", "Model.Admin");
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Interface::fenetreConnexion);
     }
 
-    // ===== CONNEXION : listener + AuthentificationException =====
+    // ===== CONNEXION : listener + Model.AuthentificationException =====
     private static void fenetreConnexion() {
         JFrame f = new JFrame("Connexion");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,7 +88,7 @@ public class Interface {
     // BRANCHEMENT DES LISTENERS sur les fenêtres de la Q3
     // =====================================================================
 
-    /** Barre de navigation : les boutons ont pour actionCommand "Catalogue", "Vendre", "Panier"... */
+    /** Barre de navigation : les boutons ont pour actionCommand "Catalogue", "Vendre", "Model.Panier"... */
     private static void brancherNavigation(JFrame f) {
         for (JButton b : chercher(f, JButton.class)) {
             String cmd = b.getActionCommand();
@@ -144,7 +152,7 @@ public class Interface {
         brancher(boutons(fenVente, "Publier").get(0), e -> publier()); // LISTENER : publication
     }
 
-    /** Relit le formulaire de FenetreVente, contrôle les saisies (exceptions) et publie l'article. */
+    /** Relit le formulaire de View.FenetreVente, contrôle les saisies (exceptions) et publie l'article. */
     @SuppressWarnings("rawtypes")
     private static void publier() {
         List<JTextField> champs = chercher(fenVente, JTextField.class);   // 1er = titre, 2e = prix
@@ -187,7 +195,7 @@ public class Interface {
         switch (page) {
             case "Catalogue": majCatalogue(); montrer(fenCatalogue); break;
             case "Vendre":    montrer(fenVente); break;
-            case "Panier":    majPanier(); montrer(fenPanier); break;
+            case "Model.Panier":    majPanier(); montrer(fenPanier); break;
             case "Compte":    client.modifierProfil(); info(fenCatalogue, "Modifications du profil enregistrées."); break;
             default:          info(fenCatalogue, "Page réservée aux administrateurs.");
         }
@@ -202,7 +210,7 @@ public class Interface {
 
     private static void retirerDuPanier(Article a) {
         try {
-            client.getPanier().retirerArticle(a);         // ArticleNonTrouveException
+            client.getPanier().retirerArticle(a);         // Model.ArticleNonTrouveException
             panierAffiche.remove(a);
             majPanier();
         } catch (ArticleNonTrouveException ex) {

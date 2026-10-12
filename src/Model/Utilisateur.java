@@ -1,6 +1,8 @@
+package Model;
+
 import java.util.Scanner;
 
-public abstract class Utilisateur implements IAction{
+public abstract class Utilisateur implements IAction {
 
     // ATTRIBUTS
     private int idUtilisateur;

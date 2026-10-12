@@ -1,6 +1,5 @@
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
+import Model.*;
+
 import java.util.Scanner;
 
 public class Main {
@@ -14,7 +13,7 @@ public class Main {
         Article article = new Vetements("Pull", 25.0f, "Très bon état", "Rouge", "pull.png");
 
         System.out.println("Vous souhaitez vous connecter en tant qu'administrateur ou en tant qu'utilisateur ?");
-        System.out.println("1. Administrateur\n2. Utilisateur\n");
+        System.out.println("1. Administrateur\n2. Model.Utilisateur\n");
 
         try {
             int premierChoix = sc.nextInt();

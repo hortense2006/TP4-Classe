@@ -1,3 +1,5 @@
+package Model;
+
 public class BDD {
     public boolean verifierIdentifiants(String mail, String mdp) throws AuthentificationException {
         String mailOriginal = "galtier.hortense@gmail.com";

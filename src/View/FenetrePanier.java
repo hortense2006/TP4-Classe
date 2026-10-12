@@ -1,3 +1,7 @@
+package View;
+
+import Model.Article;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -5,13 +9,13 @@ import java.awt.*;
 import java.util.List;
 
 /**
- * FENÊTRE 3 : "Mon Panier".
+ * FENÊTRE 3 : "Mon Model.Panier".
  * Une ligne par article (image, titre, prix, quantité, bouton supprimer)
  * puis le récapitulatif : sous-total + frais de port + total.
  *
  * POLYMORPHISME (TP4) : les frais de port viennent de calculerFraisPort(),
- * méthode abstraite d'Article redéfinie différemment dans Vetements (4,99 €)
- * et Accessoire (2,99 €). Ici on ne se préoccupe pas du type exact.
+ * méthode abstraite d'Model.Article redéfinie différemment dans Model.Vetements (4,99 €)
+ * et Model.Accessoire (2,99 €). Ici on ne se préoccupe pas du type exact.
  */
 public class FenetrePanier extends JFrame {
 
@@ -19,7 +23,7 @@ public class FenetrePanier extends JFrame {
     private final JButton btnPayer = StyleUI.creerBouton("Payer");
 
     public FenetrePanier(List<Article> articles) {
-        super("Mon Panier");
+        super("Mon Model.Panier");
         this.articles = articles;
         setContentPane(creerContenu());
         setSize(500, 460);
@@ -29,7 +33,7 @@ public class FenetrePanier extends JFrame {
     JPanel creerContenu() {
         JPanel racine = new JPanel(new BorderLayout());
         racine.setBackground(StyleUI.FOND);
-        racine.add(StyleUI.creerBarreNavigation("Panier"), BorderLayout.NORTH);
+        racine.add(StyleUI.creerBarreNavigation("Model.Panier"), BorderLayout.NORTH);
 
         // --- Liste des lignes (empilées verticalement) ---
         JPanel liste = new JPanel();

@@ -1,3 +1,7 @@
+package View;
+
+import Model.Article;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -6,7 +10,7 @@ import java.util.List;
 
 /**
  * FENÊTRE 1 : "Catalogue" (page d'accueil du wireframe).
- * Affiche les Article du TP4 (Vetements / Accessoire) sous forme de cartes
+ * Affiche les Model.Article du TP4 (Model.Vetements / Model.Accessoire) sous forme de cartes
  * dans une grille de 2 colonnes, avec une barre de filtres au-dessus.
  *
  * Structure :  JFrame
@@ -84,7 +88,7 @@ public class FenetreCatalogue extends JFrame {
         carte.add(new ApercuImage(a.getPhoto(), a.getTitre(),
                 StyleUI.couleurDepuisNom(a.getCouleur())), BorderLayout.NORTH);
 
-        // Texte : titre + état + couleur (getters de la classe Article)
+        // Texte : titre + état + couleur (getters de la classe Model.Article)
         JPanel infos = new JPanel();
         infos.setLayout(new BoxLayout(infos, BoxLayout.Y_AXIS));
         infos.setOpaque(false);

@@ -1,3 +1,5 @@
+package View;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -5,8 +7,8 @@ import java.awt.*;
 
 /**
  * FENÊTRE 2 : "Vendre un article" (formulaire du wireframe).
- * Les champs correspondent aux attributs de la classe Article du TP4
- * (titre, prix, état, couleur, photo) + le choix Vêtements / Accessoire.
+ * Les champs correspondent aux attributs de la classe Model.Article du TP4
+ * (titre, prix, état, couleur, photo) + le choix Vêtements / Model.Accessoire.
  *
  * Les composants sont des ATTRIBUTS de la classe : au TP6 Q4 on pourra
  * y accéder depuis les listeners (ex : lire txtTitre quand on clique sur "Publier").
@@ -24,7 +26,7 @@ public class FenetreVente extends JFrame {
     private final JButton btnPublier = StyleUI.creerBouton("Publier");
 
     public FenetreVente() {
-        super("Vendre un Article");
+        super("Vendre un Model.Article");
         setContentPane(creerContenu());
         setSize(420, 520);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // ferme cette fenêtre seulement

@@ -1,3 +1,5 @@
+package Model;
+
 import java.io.*;
 public abstract class Article implements Serializable{
     protected String titre;

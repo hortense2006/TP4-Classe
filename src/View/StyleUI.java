@@ -1,6 +1,7 @@
+package View;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Locale;
 
@@ -47,7 +48,7 @@ public class StyleUI {
 
     /**
      * Barre de navigation commune à toutes les pages (haut de la fenêtre).
-     * @param pageActive nom de l'onglet à mettre en évidence ("Catalogue", "Vendre", "Panier"...)
+     * @param pageActive nom de l'onglet à mettre en évidence ("Catalogue", "Vendre", "Model.Panier"...)
      * Chaque bouton a une "actionCommand" = son nom : pratique pour les listeners du TP6 Q4.
      */
     public static JPanel creerBarreNavigation(String pageActive) {
@@ -62,7 +63,7 @@ public class StyleUI {
         for (String nom : new String[]{"Catalogue", "Vendre"}) {
             gauche.add(creerOnglet(nom, nom.equals(pageActive)));
         }
-        for (String nom : new String[]{"Panier", "Compte", "Admin"}) {
+        for (String nom : new String[]{"Model.Panier", "Compte", "Model.Admin"}) {
             droite.add(creerOnglet(nom, nom.equals(pageActive)));
         }
         barre.add(gauche, BorderLayout.WEST);
@@ -88,7 +89,7 @@ public class StyleUI {
         return String.format(Locale.FRANCE, "%.2f €", prix);
     }
 
-    /** Traduit le champ "couleur" d'un Article (String) en vraie couleur Java. */
+    /** Traduit le champ "couleur" d'un Model.Article (String) en vraie couleur Java. */
     public static Color couleurDepuisNom(String nom) {
         if (nom == null) return Color.GRAY;
         switch (nom.toLowerCase()) {

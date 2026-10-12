@@ -1,10 +1,19 @@
+import Controller.Interface;
+import Model.Accessoire;
+import Model.Article;
+import Model.Vetements;
+import View.FenetreCatalogue;
+import View.FenetrePanier;
+import View.FenetreVente;
+import View.StyleUI;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Point d'entrée de l'interface graphique (le Main console du TP4 reste inchangé).
- * Crée quelques Article du TP4 et ouvre les 3 fenêtres côte à côte.
+ * Crée quelques Model.Article du TP4 et ouvre les 3 fenêtres côte à côte.
  */
 public class MainGUI {
 
