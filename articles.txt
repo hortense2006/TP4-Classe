@@ -1,1 +1,4 @@
-VETEMENT;Pull;25.0;Très bon état;Rouge;pull.png
+VETEMENT;T-shirt Vintage;15.0;Très bon état;Bleu;tshirt.png
+VETEMENT;Veste en Jean;35.0;Bon état;Bleu;veste.png
+ACCESSOIRE;Sac à main;45.0;Très bon état;Marron;sac.png
+ACCESSOIRE;Baskets de Sport;60.0;Bon état;Bleu;baskets.png
