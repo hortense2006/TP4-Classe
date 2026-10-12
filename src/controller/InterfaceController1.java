@@ -2,6 +2,8 @@ package controller;
 
 import view.InterfaceView;
 
+import javax.swing.*;
+
 public class InterfaceController1 {
     private InterfaceView view;
 
@@ -11,7 +13,13 @@ public class InterfaceController1 {
         // On écoute le clic sur le bouton de la vue
         this.view.addBoutonActionListener(e -> traiterAction());
     }
-
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            InterfaceView view = new InterfaceView();
+            new InterfaceController1(view);
+            view.setVisible(true);
+        });
+    }
     private void traiterAction() {
         String texte = view.getTexteSaisi();
 
