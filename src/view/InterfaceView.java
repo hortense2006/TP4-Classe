@@ -1,44 +1,46 @@
-package view;
+package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
-public class InterfaceView extends JFrame {
-    private JButton boutonAction;
-    private JTextField champSaisie;
-    private JLabel labelResultat;
+public class InterfaceView {
 
-    public InterfaceView() {
-        setTitle("TP4 - Gestion");
-        setSize(400, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-
-        // Initialisation des composants graphiques
-        setLayout(new FlowLayout());
-        champSaisie = new JTextField(15);
-        boutonAction = new JButton("Valider");
-        labelResultat = new JLabel("En attente d'une action...");
-
-        // Ajout des composants à la fenêtre
-        add(new JLabel("Entrez une valeur :"));
-        add(champSaisie);
-        add(boutonAction);
-        add(labelResultat);
+    public static void montrer(JFrame f) {
+        f.setVisible(true);
+        f.toFront();
     }
 
-    // Méthodes pour permettre au contrôleur d'interagir avec la vue
-    public String getTexteSaisi() {
-        return champSaisie.getText();
+    public static void erreur(Component p, String msg) {
+        JOptionPane.showMessageDialog(p, msg, "Erreur", JOptionPane.ERROR_MESSAGE);
     }
 
-    public void afficherMessage(String message) {
-        labelResultat.setText(message);
+    public static void info(Component p, String msg) {
+        JOptionPane.showMessageDialog(p, msg);
     }
 
-    // Permet d'attacher un écouteur d'événements venant du contrôleur
-    public void addBoutonActionListener(ActionListener listener) {
-        boutonAction.addActionListener(listener);
+    public static void afficherTexte(Component p, String titre, String texte) {
+        JTextArea z = new JTextArea(texte, 10, 40);
+        z.setEditable(false);
+        JOptionPane.showMessageDialog(p, new JScrollPane(z), titre, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /** Parcourt récursivement l'arbre de composants et renvoie ceux du type demandé, dans l'ordre. */
+    public static <T extends Component> List<T> chercher(Container c, Class<T> type) {
+        List<T> res = new ArrayList<>();
+        for (Component comp : c.getComponents()) {
+            if (type.isInstance(comp)) res.add(type.cast(comp));
+            if (comp instanceof Container) res.addAll(chercher((Container) comp, type));
+        }
+        return res;
+    }
+
+    public static List<JButton> boutons(Container c, String texte) {
+        List<JButton> res = new ArrayList<>();
+        for (JButton b : chercher(c, JButton.class)) {
+            if (texte.equals(b.getText())) res.add(b);
+        }
+        return res;
     }
 }
