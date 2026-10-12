@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public interface IGestion {
     public boolean supprimerAnnonce(Article article) throws ArticleNonTrouveException;

@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class ArticleNonTrouveException extends Exception {
     public ArticleNonTrouveException(String message) {

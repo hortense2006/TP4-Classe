@@ -1,6 +1,6 @@
-package View;
+package view;
 
-import Model.Article;
+import model.Article;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

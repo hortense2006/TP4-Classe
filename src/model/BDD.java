@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class BDD {
     public boolean verifierIdentifiants(String mail, String mdp) throws AuthentificationException {

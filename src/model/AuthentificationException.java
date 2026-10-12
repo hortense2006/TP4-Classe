@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class AuthentificationException extends Exception {
     public AuthentificationException(String message) {

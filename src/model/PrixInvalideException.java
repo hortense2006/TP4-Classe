@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class PrixInvalideException extends Exception {
     public PrixInvalideException(String message) {

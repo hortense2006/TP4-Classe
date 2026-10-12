@@ -1,10 +1,10 @@
-package Controller;
+package controller;
 
-import Model.*;
-import View.FenetreCatalogue;
-import View.FenetrePanier;
-import View.FenetreVente;
-import View.StyleUI;
+import model.*;
+import view.FenetreCatalogue;
+import view.FenetrePanier;
+import view.FenetreVente;
+import view.StyleUI;
 
 import javax.swing.*;
 import java.awt.*;

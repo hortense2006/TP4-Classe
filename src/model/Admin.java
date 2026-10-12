@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class Admin extends Utilisateur implements IGestion {
     private int nvAccreditation;

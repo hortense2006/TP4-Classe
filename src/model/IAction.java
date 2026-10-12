@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public interface IAction {
     public void communiquer(Utilisateur destinataire, String message);
