@@ -50,7 +50,7 @@ public class InterfaceController1 {
                 f.dispose();
                 ouvrirApplication();
             } catch (AuthentificationException ex) {
-                View.InterfaceView.erreur(f, ex.getMessage());
+                InterfaceView.erreur(f, ex.getMessage());
             }
         });
         f.setSize(420, 160);
@@ -81,7 +81,7 @@ public class InterfaceController1 {
     // =====================================================================
 
     private static void brancherNavigation(JFrame f) {
-        for (JButton b : View.InterfaceView.chercher(f, JButton.class)) {
+        for (JButton b : InterfaceView.chercher(f, JButton.class)) {
             String cmd = b.getActionCommand();
             if (NAV.contains(cmd)) brancher(b, e -> naviguer(cmd));
         }
@@ -90,7 +90,7 @@ public class InterfaceController1 {
     private static void brancherCatalogue() {
         brancherNavigation(fenCatalogue);
 
-        List<JButton> ajouts = View.InterfaceView.boutons(fenCatalogue, "Ajouter au panier");
+        List<JButton> ajouts = InterfaceView.boutons(fenCatalogue, "Ajouter au panier");
         for (int i = 0; i < ajouts.size() && i < catalogue.size(); i++) {
             Article a = catalogue.get(i);
             brancher(ajouts.get(i), e -> ajouterAuPanier(a));
